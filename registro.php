@@ -22,7 +22,7 @@ if(mysqli_num_rows($result) > 0){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
-    <link rel="stylesheet" type="text/css" href="librerias/bootstrap1/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="librerias/bootstrap/css/bootstrap.css">
     <script src="librerias/jquery-3.2.1.min.js"></script>
     <script src="js/funciones.js"></script>
 
