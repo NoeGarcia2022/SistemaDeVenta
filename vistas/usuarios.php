@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Inicio</title>
+    <title>Usuarios</title>
     <?php require_once "menu.php"; ?>
 </head>
 <body>
@@ -19,7 +19,8 @@
 
 <?php
   }else{
-   header("location:../index.php");
+   
+header("location:../index.php");
   }
 
 ?>
