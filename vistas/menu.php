@@ -1,3 +1,7 @@
+<?php
+        require_once "dependencias.php";
+    ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,10 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ventas</title>
-    <?php
-
-        require_once "dependencias.php";
-    ?>
+    
 </head>
 <body>
 
@@ -35,7 +36,10 @@
             
           </li>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list-alt"></span> Administrar Articulos <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <span class="glyphicon glyphicon-list-alt"></span> 
+              Administrar Articulos <span class="caret">
+              </span></a>
             <ul class="dropdown-menu">
               <li><a href="categorias.php">Categorias</a></li>
               <li><a href="articulos.php">Articulos</a></li>
