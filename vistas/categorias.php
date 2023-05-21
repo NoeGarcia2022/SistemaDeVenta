@@ -32,6 +32,35 @@ if (isset($_SESSION['usuario'])) {
 			</div>
 		</div>
 
+		<!-- Button trigger modal -->
+
+
+		<!-- Modal -->
+		<div class="modal fade" id="actualizaCategoria" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">Actualiza Categorias</h4>
+					</div>
+					<div class="modal-body">
+						<form id="frmCategoriaU">
+							<input type="text" name="idcategoria" id="idcategoria" hidden="">
+							<label for="">Categoria</label>
+							<input type="text" name="categoriaU" id="categoriaU" class="form-control input-sm">
+
+						</form>
+
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-warning" data-dismiss="modal" id="btnActualizaCategoria">Guardar</button>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</body>
 
 	</html>
@@ -67,6 +96,38 @@ if (isset($_SESSION['usuario'])) {
 				});
 			});
 		});
+	</script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			//script para evento click y ajax 
+			$('#btnActualizaCategoria').click(function() {
+
+				datos = $('#frmCategoriaU').serialize();
+				$.ajax({
+					type: "POST",
+					data: datos,
+					url: "../procesos/categorias/actualizaCategoria.php",
+					success: function(r) {
+						if (r == 1) {
+							$('#tablaCategoriaLoad').load("categorias/tablaCategorias.php");
+							alertify.success("Actualizado con exito :)");
+						}else{
+							alertify.error("No se puede actualizar :(");
+						}
+
+					}
+				});
+			});
+		});
+	</script>
+
+
+	<script type="text/javascript">
+		function agregaDato(idCategoria, categoria) {
+			$('#idcategoria').val(idCategoria);
+			$('#categoriaU').val(categoria);
+		}
 	</script>
 
 <?php
