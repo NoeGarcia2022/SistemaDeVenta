@@ -1,16 +1,18 @@
-<?php 
+<?php
 session_start();
-if(isset($_SESSION['usuario'])){
+if (isset($_SESSION['usuario'])) {
 
-	?>
+?>
 
 
 	<!DOCTYPE html>
 	<html>
+
 	<head>
 		<title>categorias</title>
 		<?php require_once "menu.php"; ?>
 	</head>
+
 	<body>
 
 		<div class="container">
@@ -31,40 +33,44 @@ if(isset($_SESSION['usuario'])){
 		</div>
 
 	</body>
+
 	</html>
 	<script type="text/javascript">
-		$(document).ready(function(){
+		$(document).ready(function() {
 
 			$('#tablaCategoriaLoad').load("categorias/tablaCategorias.php");
 
-			$('#btnAgregaCategoria').click(function(){
+			$('#btnAgregaCategoria').click(function() {
 
-				vacios=validarFormVacio('frmCategorias');
+				vacios = validarFormVacio('frmCategorias');
 
-				if(vacios > 0){
+				if (vacios > 0) {
 					alertify.alert("Debes llenar todos los campos!!");
 					return false;
 				}
 
-				datos=$('#frmCategorias').serialize();
+				datos = $('#frmCategorias').serialize();
 				$.ajax({
-					type:"POST",
-					data:datos,
-					url:"../procesos/categorias/agregaCategoria.php",
-					success:function(r){
-						if(r==1){
-					alertify.success("Categoria agregada con exito :D");
-				}else{
-					alertify.error("No se pudo agregar categoria");
-				}
-			}
-		});
+					type: "POST",
+					data: datos,
+					url: "../procesos/categorias/agregaCategoria.php",
+					success: function(r) {
+						if (r == 1) {
+							//esta linea nos permite limpiar el formulario al insertar un registro
+							$('#frmCategorias')[0].reset();
+							$('#tablaCategoriaLoad').load("categorias/tablaCategorias.php");
+							alertify.success("Categoria agregada con exito :D");
+						} else {
+							alertify.error("No se pudo agregar categoria");
+						}
+					}
+				});
 			});
 		});
 	</script>
 
-	<?php 
-}else{
+<?php
+} else {
 	header("location:../index.php");
 }
 ?>
