@@ -56,45 +56,44 @@ if (isset($_SESSION['usuario'])) {
   </html>
 
   <script type="text/javascript">
-    $(document).ready(function() {
-      $('#tablaArticulosLoad').load("articulos/tablaArticulos.php");
+		$(document).ready(function(){
+			$('#tablaArticulosLoad').load("articulos/tablaArticulos.php");
 
-      $('#btnAgregaArticulo').click(function() {
+			$('#btnAgregaArticulo').click(function(){
 
-        /*vacios = validarFormVacio('frmArticulos');
+				vacios=validarFormVacio('frmArticulos');
 
-        if (vacios > 0) {
-          alertify.alert("Debes llenar todos los campos!!");
-          return false;
-        } */
+				if(vacios > 0){
+					alertify.alert("Debes llenar todos los campos!!");
+					return false;
+				}
 
-        var formData = new FormData(document.getElementById("frmArticulos"));
+				var formData = new FormData(document.getElementById("frmArticulos"));
 
-        $.ajax({
-          url: "../procesos/articulos/insertarArticulos.php",
-          type: "post",
-          dataType: "html",
-          data: formData,
-          cache: false,
-          contentType: false,
-          processData: false,
+				$.ajax({
+					url: "../procesos/articulos/insertaArticulos.php",
+					type: "post",
+					dataType: "html",
+					data: formData,
+					cache: false,
+					contentType: false,
+					processData: false,
 
-          success: function(r) {
-
-            alert(r);
-
-            if (r == 1) {
-              $('#frm')[0].reset();
-              $('#tablaArticulosLoad').load("articulos/tablaArticulos.php");
-              alertify.success("Agregado con exito :D");
-            } else {
-              alertify.error("Fallo al subir el archivo :(");
-            }
-          }
-        });
-      });
-    });
-  </script>
+					success:function(r){
+						
+						if(r == 1){
+							$('#frmArticulos')[0].reset();
+							$('#tablaArticulosLoad').load("articulos/tablaArticulos.php");
+							alertify.success("Agregado con exito :D");
+						}else{
+							alertify.error("Fallo al subir el archivo :(");
+						}
+					}
+				});
+				
+			});
+		});
+	</script>
 
 <?php
 } else {
