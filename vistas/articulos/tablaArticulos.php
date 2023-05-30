@@ -14,7 +14,7 @@ $sql = " SELECT art.nombre,
             on art.id_imagen=img.id_imagen
             inner join categorias as cat
 		    on art.id_categoria=cat.id_categoria";
-        $result = mysqli_query($conexion, $sql);
+$result = mysqli_query($conexion, $sql);
 ?>
 
 <table class="table table-hover table-condensed table-bordered" style="text-align: center;">
@@ -48,10 +48,12 @@ $sql = " SELECT art.nombre,
             </td>
             <td><?php echo $ver[5]; ?></td>
             <td>
-                <span class="btn btn-warning btn-xs">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </span>
-            </td>
+			<span  data-toggle="modal" data-target="#abremodalUpdateArticulo" 
+			class="btn btn-warning btn-xs" 
+			onclick="agregaDatosArticulo('<?php echo $ver[6] ?>')">
+				<span class="glyphicon glyphicon-pencil"></span>
+			</span>
+		</td>
             <td>
                 <span class="btn btn-danger btn-xs">
                     <span class="glyphicon glyphicon-remove"></span>
