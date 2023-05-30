@@ -54,11 +54,11 @@ $result = mysqli_query($conexion, $sql);
 				<span class="glyphicon glyphicon-pencil"></span>
 			</span>
 		</td>
-            <td>
-                <span class="btn btn-danger btn-xs">
-                    <span class="glyphicon glyphicon-remove"></span>
-                </span>
-            </td>
+        <td>
+			<span class="btn btn-danger btn-xs" onclick="eliminaArticulo('<?php echo $ver[6] ?>')">
+				<span class="glyphicon glyphicon-remove"></span>
+			</span>
+		</td>
         </tr>
     <?php endwhile; ?>
 </table>
