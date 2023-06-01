@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-if (isset($_SESSION['usuario']) and $_SESSION['usuario']=='admin') {
+if (isset($_SESSION['usuario']) and $_SESSION['usuario'] == 'admin') {
 
 ?>
 
@@ -39,9 +39,76 @@ if (isset($_SESSION['usuario']) and $_SESSION['usuario']=='admin') {
         </div>
       </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="actualizaUsuarioModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Actualiza Usuario</h4>
+          </div>
+          <div class="modal-body">
+            <form id="frmRegistroU">
+              <input type="text" hidden="" id="idUsuario" name="idUsuario">
+              <label>Nombre</label>
+              <input type="text" class="form-control input-sm" id="nombreU" name="nombreU">
+
+              <label>Apellido</label>
+              <input type="text" class="form-control input-sm" id="apellidoU" name="apellidoU">
+
+              <label>Usuario</label>
+              <input type="text" class="form-control input-sm" id="usuarioU" name="usuarioU">
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button id="btnActualizaUsuario" type="button" class="btn btn-warning" data-dismiss="modal">Actualiza Usuario</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </body>
 
   </html>
+
+  <script type="text/javascript">
+    function agregaDatosUsuario(idusuario) {
+
+      $.ajax({
+        type: "POST",
+        data: "idusuario=" + idusuario,
+        url: "../procesos/usuarios/obtenDatosUsuario.php",
+        success: function(r) {
+          dato = jQuery.parseJSON(r);
+
+          $('#idUsuario').val(dato['id_usuario']);
+          $('#nombreU').val(dato['nombre']);
+          $('#apellidoU').val(dato['apellido']);
+          $('#usuarioU').val(dato['email']);
+
+        }
+      });
+    }
+  </script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('#btnActualizaUsuario').click(function() {
+
+        datos = $('#frmRegistroU').serialize();
+        $.ajax({
+          type: "POST",
+          data: datos,
+          url: "../procesos/",
+          success: function(r) {
+
+          }
+        });
+      });
+
+    });
+  </script>
 
   <script type="text/javascript">
     $(document).ready(function() {
@@ -66,6 +133,7 @@ if (isset($_SESSION['usuario']) and $_SESSION['usuario']=='admin') {
           success: function(r) {
             //alert(r);
             if (r == 1) {
+              $('#frmRegistro')[0].reset();
               $('#tablaUsuariosLoad').load('usuarios/tablaUsuarios.php');
               alertify.success("Agregado con exito");
             } else {
