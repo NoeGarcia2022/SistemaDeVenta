@@ -7,10 +7,12 @@
             <td>Direccion</td>
             <td>Email</td>
             <td>Telefono</td>
+            <td>DUI</td>
             <td>Editar</td>
             <td>Eliminar</td>
         </tr>
         <tr>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>

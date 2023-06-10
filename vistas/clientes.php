@@ -6,17 +6,17 @@ if (isset($_SESSION['usuario'])) {
 
 ?>
 
-  <!DOCTYPE html>
-  <html lang="en">
+	<!DOCTYPE html>
+	<html lang="en">
 
-  <head>
+	<head>
 
-    <title>Clientes</title>
-    <?php require_once "menu.php"; ?>
-  </head>
+		<title>Clientes</title>
+		<?php require_once "menu.php"; ?>
+	</head>
 
-  <body>
-  <div class="container">
+	<body>
+		<div class="container">
 			<h1>Clientes</h1>
 			<div class="row">
 				<div class="col-sm-4">
@@ -31,7 +31,7 @@ if (isset($_SESSION['usuario'])) {
 						<input type="text" class="form-control input-sm" id="email" name="email">
 						<label>Telefono</label>
 						<input type="text" class="form-control input-sm" id="telefono" name="telefono">
-						<label>RFC</label>
+						<label>DUI</label>
 						<input type="text" class="form-control input-sm" id="rfc" name="rfc">
 						<p></p>
 						<span class="btn btn-primary" id="btnAgregarCliente">Agregar</span>
@@ -42,16 +42,16 @@ if (isset($_SESSION['usuario'])) {
 				</div>
 			</div>
 		</div>
-  </body>
+	</body>
 
-  </html>
+	</html>
 
-  <script type="text/javascript">
-		$(document).ready(function(){
+	<script type="text/javascript">
+		$(document).ready(function() {
 
 			$('#tablaClientesLoad').load("clientes/tablaClientes.php");
 
-			$('#btnAgregarCliente').click(function(){
+			$('#btnAgregarCliente').click(function() {
 
 				vacios=validarFormVacio('frmClientes');
 
@@ -60,19 +60,17 @@ if (isset($_SESSION['usuario'])) {
 					return false;
 				}
 
-				datos=$('#frmClientes').serialize();
-
+				datos = $('#frmClientes').serialize();
 				$.ajax({
-					type:"POST",
-					data:datos,
-					url:"../procesos/clientes/agregaCliente.php",
-					success:function(r){
-
-						if(r==1){
+					type: "POST",
+					data: datos,
+					url: "../procesos/clientes/agregaCliente.php",
+					success: function(r) {
+						if (r == 1) {
 							$('#frmClientes')[0].reset();
 							$('#tablaClientesLoad').load("clientes/tablaClientes.php");
 							alertify.success("Cliente agregado con exito :D");
-						}else{
+						} else {
 							alertify.error("No se pudo agregar cliente");
 						}
 					}
@@ -84,7 +82,7 @@ if (isset($_SESSION['usuario'])) {
 <?php
 } else {
 
-  header("location:../index.php");
+	header("location:../index.php");
 }
 
 ?>
