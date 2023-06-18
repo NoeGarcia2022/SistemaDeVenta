@@ -98,6 +98,26 @@ if (isset($_SESSION['usuario'])) {
 				}
 			});
 		}
+
+		function eliminarCliente(idcliente) {
+			alertify.confirm('¿Desea eliminar este cliente?', function() {
+				$.ajax({
+					type: "POST",
+					data: "idcliente=" + idcliente,
+					url: "../procesos/clientes/eliminarCliente.php",
+					success: function(r) {
+						if (r == 1) {
+							$('#tablaClientesLoad').load("clientes/tablaClientes.php");
+							alertify.success("Eliminado con exito!!");
+						} else {
+							alertify.error("No se pudo eliminar :(");
+						}
+					}
+				});
+			}, function() {
+				alertify.error('Cancelo !')
+			});
+		}
 	</script>
 
 	<script type="text/javascript">
@@ -133,22 +153,22 @@ if (isset($_SESSION['usuario'])) {
 		});
 	</script>
 
-<script type="text/javascript">
-		$(document).ready(function(){
-			$('#btnAgregarClienteU').click(function(){
-				datos=$('#frmClientesU').serialize();
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#btnAgregarClienteU').click(function() {
+				datos = $('#frmClientesU').serialize();
 
 				$.ajax({
-					type:"POST",
-					data:datos,
-					url:"../procesos/clientes/actualizaCliente.php",
-					success:function(r){
+					type: "POST",
+					data: datos,
+					url: "../procesos/clientes/actualizaCliente.php",
+					success: function(r) {
 
-						if(r==1){
+						if (r == 1) {
 							$('#frmClientes')[0].reset();
 							$('#tablaClientesLoad').load("clientes/tablaClientes.php");
 							alertify.success("Cliente actualizado con exito :D");
-						}else{
+						} else {
 							alertify.error("No se pudo actualizar cliente");
 						}
 					}
