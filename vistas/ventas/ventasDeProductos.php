@@ -9,7 +9,7 @@ $conexion = $c->conexion();
     <div class="col-sm-4">
         <form id="frmVentasProductos">
             <label>Selecciona Cliente</label>
-            <select name="" id="clienteVenta" class="form-control input-sm">
+            <select name="clienteVenta" id="clienteVenta" class="form-control input-sm">
                 <option value="A">Selecciona</option>
                 <option value="0">Sin cliente</option>
                 <?php
@@ -48,13 +48,19 @@ $conexion = $c->conexion();
             <span class="btn btn-primary" id="btnAgregaVenta">Agregar</span>
         </form>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-3">
         <div id="imgProducto"></div>
+    </div>
+    <div class="col-sm-4">
+        <div id="tablaVentasTempLoad"></div>
     </div>
 </div>
 
 <script type="text/javascript">
     $(document).ready(function() {
+
+        $('#tablaVentasTempLoad').load("ventas/tablaVentasTemp.php");
+
         $('#productoVenta').change(function() {
             $.ajax({
                 type: "POST",
@@ -67,6 +73,24 @@ $conexion = $c->conexion();
                     $('#precioV').val(dato['precio']);
 
                     $('#imgProducto').prepend('<img class="img-thumbnail" id="imgp" src = "' + dato['ruta'] + '" / > ');
+                }
+            });
+        });
+
+        $('#btnAgregaVenta').click(function() {
+            vacios = validarFormVacio('frmVentasProductos');
+
+            if (vacios > 0) {
+                alertify.alert("Debes llenar todos los campos!!");
+                return false;
+            }
+            datos = $('#frmVentasProductos').serialize();
+            $.ajax({
+                type: "POST",
+                data: datos,
+                url: "../procesos/ventas/agregaProductoTemp.php",
+                success: function(r) {
+
                 }
             });
         });
